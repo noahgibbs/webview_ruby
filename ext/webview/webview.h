@@ -619,9 +619,11 @@ public:
                           (cocoa_wkwebview_engine *)objc_getAssociatedObject(
                               self, "webview");
                       assert(w);
-                      w->on_message(((const char *(*)(id, SEL))objc_msgSend)(
-                          ((id(*)(id, SEL))objc_msgSend)(msg, "body"_sel),
-                          "UTF8String"_sel));
+                      if(w) {
+                          w->on_message(((const char *(*)(id, SEL))objc_msgSend)(
+                              ((id(*)(id, SEL))objc_msgSend)(msg, "body"_sel),
+                              "UTF8String"_sel));
+                      }
                     }),
                     "v@:@@");
     objc_registerClassPair(cls);
